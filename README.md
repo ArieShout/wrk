@@ -1,3 +1,20 @@
+# split the key from pfx
+
+```
+openssl pkcs12 -in filename.pfx -nocerts -out key.pem
+openssl pkcs12 -in filename.pfx -clcerts -nokeys -out cert.pem
+openssl rsa -in key.pem -out server.key
+```
+
+step2 you should set a password, and input the same password in step 3.
+
+
+# Use with cert/key
+
+```
+ ./wrk --clientcert ./cert.pem --clientkey ./cert.key -c 1 -t 1 -d 2s https://yoj-delete-me-perf.svc.asc-test.net/config/actuator/health
+```
+
 # wrk - a HTTP benchmarking tool
 
   wrk is a modern HTTP benchmarking tool capable of generating significant
